@@ -121,9 +121,6 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-from .cdn.conf import * #noqa
-
 # https://www.cfe.sh/blog/django-static-files-digitalocean-spaces
 # https://proyectocertamen.nyc3.digitaloceanspaces.com
 
