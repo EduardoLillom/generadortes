@@ -116,7 +116,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # https://www.cfe.sh/blog/django-static-files-digitalocean-spaces
 # https://proyectocertamen.nyc3.digitaloceanspaces.com
