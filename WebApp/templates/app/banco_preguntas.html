@@ -1,0 +1,124 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="titulo">
+    <h1>Listado de preguntas</h1>
+</div>
+<div class="elContenedor">
+    <form method="post" onsubmit="return validacion()">
+        {% csrf_token %}
+        <label ><h4>Filtrar por temas</h4></label><br>
+
+        <select class="btn btn-secondary dropdown-toggle" id="ramo">
+            <option selected>Selecione</option>
+        </select>
+
+        <select class="btn btn-secondary dropdown-toggle" id="materia" name="Tema">
+            <option selected>------</option>
+        </select>
+
+        <input style="width: 100px;"  class="btn btn-primary" type="submit" value="Filtrar">
+        
+    </form>
+    <div>
+        {% for pregunta in preguntas %}
+        <div class="preguntas mb-3" style="max-width: 800px;">
+            <div class="card-header">Pregunta número {{forloop.counter}} </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <!--posible titulo de la pregunta-->
+                </h5>
+                <p class="card-text">
+                    {{ pregunta.pregunta }}
+                </p>
+
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+    
+</div>
+<script>
+    function validacion() {
+        var tema = document.getElementById("ramo").value;
+        var validado = true;
+        if (tema == "Selecione") {
+            alert("Debe seleccionar un tema");
+            validado = false;
+        }
+        return validado;
+    }
+
+    let curso = ["Selecione","MAT021","MAT022","MAT023","MAT024"];
+    let materia_MAT021 = [["numeros_reales","Numeros reales"],
+    ["funciones","Funciones"],
+    ["limite","Limite"],
+    ["continuidad","Continuidad"],
+    ["calculo_diferencial","Calculo diferencial"],
+    ["logica_proposicional","Logica proposicional"],
+    ["conjunto","Conjunto"],
+    ["relaciones","Relaciones"],
+    ["trigonometria","Trigonometria"],
+    ["exponencial_logaritmo","Exponencial logaritmo"],
+    ["geometria_analitica","Geometria analitica"],
+    ["induccion","Induccion"],
+    ["sumatoria_productoria","Sumatoria productoria"],
+    ["numeros_complejos","Numeros complejos"],
+    ["polinomios","Polinomios"],];
+
+
+    let combobox_ramo = document.getElementById("ramo");
+    let combobox_materia = document.getElementById("materia");
+    
+
+    function recorrer(combobox,valores,campo){
+        console.log(campo)
+        combobox.innerHTML = "";
+        
+        if(campo == "ramo"){
+            for(let index of valores){
+                combobox.innerHTML += `<option value="${index}">${index}&nbsp;&nbsp;&nbsp;</option>`;
+            }
+        }else{
+            for(let index of valores){
+                combobox.innerHTML += `<option value="${index[0]}">${index[1]}&nbsp;&nbsp;&nbsp;</option>`;
+        }}
+    }
+
+    function llenarCampo(){
+        recorrer(combobox_materia,[["------------","-------------"]],"materia");
+        recorrer(combobox_ramo,curso,"ramo");
+    }
+
+    llenarCampo()
+
+    combobox_ramo.addEventListener("change",(e)=>{
+        let dato = e.target.value;
+        
+        switch (dato) {
+            case "Seleccione":
+                recorrer(combobox_materia,[["------------","-------------"]],"materia");
+                break;
+            case "MAT021":
+                recorrer(combobox_materia,materia_MAT021,"materia");
+                break;
+            case "MAT022":
+                recorrer(combobox_materia,[["Proximamente","Proximamente"]],"materia");
+                break;
+            case "MAT023":
+                recorrer(combobox_materia,[["Proximamente","Proximamente"]],"materia");
+                break;
+            case "MAT024":
+                recorrer(combobox_materia,[["Proximamente","Proximamente"]],"materia");
+                break;
+            default:
+                recorrer(combobox_materia,[["------------","-------------"]],"materia");
+                break;
+        }
+        }
+    );
+</script>
+{% endblock %}

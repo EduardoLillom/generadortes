@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+
+<div class="elContenedor">
+    <p>
+        {% for post in post %}
+        <div class="preguntas mb-3 mx-auto" style="width: 85%;">
+            <div class="card-header"><i style="float: left; " class="svg-inline--fa fas fa-user-circle fa-2x">&nbsp;</i>
+                <p style="display: inline-block; ">{{post.usuario.first_name}}{{" "}}{{post.usuario.last_name}}</p> &nbsp;<h7 style="color: gray; font-size: 10px;">
+                    {{post.tiempo}}</h7>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <!--posible titulo de la pregunta-->
+                </h5>
+                <p class="card-text">
+                    <h5>{{post.texto}}</h5>
+                </p>
+                <div>
+                    <a style="text-decoration: none;" href="{% url 'foro2' post.pk %}">
+                        <div style="text-align: right;"><i class="fas fa-comments "></i>&nbsp;&nbsp;Comentar</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </p>
+</div>
+
+{% endblock %}

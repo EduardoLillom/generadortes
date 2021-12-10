@@ -1,0 +1,66 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+
+{% block css %}
+{% endblock %}
+
+
+{% block contenido %}
+
+<div class="titulo">
+    <h2>Bienvenido <p id="mostrarNombre">{{name}}</p>
+    </h2>
+</div>
+
+<div class="elContenedor">
+
+<div class="flex-index">
+
+    <div style="margin-left: 30px;">
+            <h3>Preguntas recientes</h3>
+            {% for p in post %}
+            <div class="preguntas mb-3" style="max-width: 500px;">
+
+                <div class="card-header"><i style="float: left; "class="svg-inline--fa fas fa-user-circle fa-2x">&nbsp;</i> <p style="display: inline-block; ">{{p.usuario.first_name}}{{" "}}{{p.usuario.last_name}}</p> &nbsp;<h7 style="color: gray; font-size: 10px;">{{p.tiempo}}</h7></div> 
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                            <h5 href=>{{p.texto}}</h5>
+                        </p>
+                    <a style="text-decoration: none; " href="/post_id/{{p.id}}/">
+                        <div class="comentar" style="text-align: right;"><i class="fas fa-comments "></i>&nbsp;&nbsp;Comentar</div>
+                    </a>
+                    
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+        <div>
+            <h3> <i class="fas fa-trophy" style="color: gold;"></i> &nbsp; Ranking puntos de prestigio</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre usuario </th>
+                        <th scope="col">Puntos de prestigo</th>
+                    </tr>
+                </thead>
+
+                {% for u in top %}
+                <thbody>
+                    <tr>
+                        <td> {{u.0}}</td>
+                        <td style="padding-left: 10px;"> {{u.1}}</td>
+                    </tr>
+                </thbody>
+
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
