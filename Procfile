@@ -1,1 +1,1 @@
-web: gunicorn PROYECTOCERTAMEN.wsgi 
+web: gunicorn PROYECTOCERTAMEN.wsgi --log-file -
